@@ -1,6 +1,47 @@
 // Word database organized by categories
-const wordsDatabase = {
-     animals: [
+
+// Category metadata
+window.categoryInfo =  {
+    animals: {
+        name: "Animals",
+        icon: "🐘",
+        color: "#27ae60",
+        description: "Guess the animal names!"
+    },
+    food: {
+        name: "Food & Drinks",
+        icon: "🍕",
+        color: "#e67e22",
+        description: "Delicious food vocabulary!"
+    },
+    sports: {
+        name: "Sports",
+        icon: "⚽",
+        color: "#3498db",
+        description: "Sports and activities!"
+    },
+    countries: {
+        name: "Countries",
+        icon: "🌍",
+        color: "#9b59b6",
+        description: "Countries around the world!"
+    },
+    technology: {
+        name: "Technology",
+        icon: "💻",
+        color: "#1abc9c",
+        description: "Tech and computer terms!"
+    },
+    nature: {
+        name: "Nature",
+        icon: "🌿",
+        color: "#2ecc71",
+        description: "Natural wonders!"
+    }
+};
+
+window.wordsDatabase = {
+    animals: [
     "ELEPHANT", "GIRAFFE", "KANGAROO", "DOLPHIN", "PENGUIN",
     "CROCODILE", "BUTTERFLY", "SCORPION", "FLAMINGO", "CHAMELEON",
     "RHINOCEROS", "HIPPOPOTAMUS", "ALLIGATOR", "CHEETAH", "LEOPARD",
@@ -126,7 +167,7 @@ sports: [
     "QUANTUM", "NANOTECHNOLOGY", "BIOMETRICS", "HAPTICS", "HOLOGRAM",
     "MAINFRAME", "SUPERCOMPUTER", "GPU", "CPU", "RAM",
     "SSD", "HDD", "FLASH", "CLOUDSTORAGE", "BACKUP",
-    // + 930 ADDED TECHNOLOGY WORDS
+    
     "AGILE", "SCRUM", "KANBAN", "DEVOPS", "CI_CD",
     "GIT", "MERGE", "BRANCH", "COMMIT", "REPOSITORY",
     "DEBUGGER", "STACKTRACE", "EXCEPTION", "THREAD", "PROCESS",
@@ -412,42 +453,3 @@ nature: [
 
 };
 
-// Category metadata
-const categoryInfo = {
-    animals: {
-        name: "Animals",
-        icon: "🐘",
-        color: "#27ae60",
-        description: "Guess the animal names!"
-    },
-    food: {
-        name: "Food & Drinks",
-        icon: "🍕",
-        color: "#e67e22",
-        description: "Delicious food vocabulary!"
-    },
-    sports: {
-        name: "Sports",
-        icon: "⚽",
-        color: "#3498db",
-        description: "Sports and activities!"
-    },
-    countries: {
-        name: "Countries",
-        icon: "🌍",
-        color: "#9b59b6",
-        description: "Countries around the world!"
-    },
-    technology: {
-        name: "Technology",
-        icon: "💻",
-        color: "#1abc9c",
-        description: "Tech and computer terms!"
-    },
-    nature: {
-        name: "Nature",
-        icon: "🌿",
-        color: "#2ecc71",
-        description: "Natural wonders!"
-    }
-};

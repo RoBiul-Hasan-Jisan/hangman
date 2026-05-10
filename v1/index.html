@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game - Choose Your Category</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Category Selection Screen -->
+        <div id="categoryScreen" class="screen active">
+            <div class="logo">
+                <h1>🎮 HANGMAN GAME 🎮</h1>
+                <p class="tagline">Choose a category to begin your challenge!</p>
+            </div>
+            
+            <div class="categories-container" id="categoriesContainer">
+                <!-- Categories will be dynamically loaded here -->
+            </div>
+            
+            <div class="game-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-info">
+                        <div class="stat-label">Total Games</div>
+                        <div class="stat-value" id="totalGames">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-info">
+                        <div class="stat-label">Games Won</div>
+                        <div class="stat-value" id="gamesWon">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <div class="stat-label">Win Rate</div>
+                        <div class="stat-value" id="winRate">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-header">
+                <button class="back-btn" id="backToCategories">← Back to Categories</button>
+                <div class="category-badge" id="currentCategory"></div>
+            </div>
+
+            <div class="game-main">
+                <div class="hangman-section">
+                    <canvas id="hangmanCanvas" width="400" height="350"></canvas>
+                </div>
+
+                <div class="game-info-section">
+                    <div class="lives-container">
+                        <div class="lives-title">Lives Remaining</div>
+                        <div class="hearts" id="heartsContainer"></div>
+                        <div class="lives-count" id="livesCount">15</div>
+                    </div>
+
+                    <div class="word-container">
+                        <div class="word-label">Secret Word</div>
+                        <div class="word-display" id="wordDisplay"></div>
+                    </div>
+
+                    <div class="used-letters-container">
+                        <div class="used-label">Used Letters</div>
+                        <div class="used-letters" id="usedLetters"></div>
+                    </div>
+
+                    <div class="keyboard" id="keyboard"></div>
+
+                    <div class="game-controls">
+                        <button class="control-btn hint-btn" id="hintBtn">💡 Get Hint</button>
+                        <button class="control-btn new-btn" id="newGameBtn">🔄 New Word</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="words.js"></script>
+    <script src="categories.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

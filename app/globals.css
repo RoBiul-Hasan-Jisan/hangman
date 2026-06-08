@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
+body {
+  background: transparent;
+  color: #f1f5f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glass Morphism Utilities */
+.glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 12px;
+}
+
+.glass-subtle {
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(71, 85, 105, 0.2);
+}
+
+.glass-strong {
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(71, 85, 105, 0.4);
+}
+
+/* Gradient Overlays */
+.gradient-border {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899) border-box;
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glow-pink {
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Text Gradients */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes bounce-smooth {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+.slide-left {
+  animation: slideLeft 0.3s ease-out;
+}
+
+.slide-right {
+  animation: slideRight 0.3s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.breathe {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.bounce-smooth {
+  animation: bounce-smooth 2s ease-in-out infinite;
+}
+
+/* Smooth Transitions */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.transition-smooth-fast {
+  transition: all 0.15s ease-out;
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+}

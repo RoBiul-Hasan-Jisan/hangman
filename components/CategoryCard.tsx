@@ -1,8 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
-import gsap from 'gsap';
-import { setupTilt, glowPulse } from '@/lib/animations';
+import { useRef } from 'react';
 import { CategoryInfo } from '@/lib/wordData';
 
 interface CategoryCardProps {
@@ -36,68 +34,26 @@ export default function CategoryCard({
     nature: 'from-green-500/20 to-lime-500/20 border-green-500/50',
   };
 
-  useEffect(() => {
-    if (cardRef.current) {
-      // Setup tilt effect on hover
-      setupTilt(cardRef.current);
-
-      // Add glow pulse animation
-      glowPulse(cardRef.current);
-
-      // Hover animations
-      cardRef.current.addEventListener('mouseenter', () => {
-        gsap.to(contentRef.current, {
-          scale: 1.05,
-          duration: 0.3,
-          ease: 'power2.out',
-        });
-
-        gsap.to(cardRef.current, {
-          boxShadow: `0 30px 60px rgba(59, 130, 246, 0.3)`,
-          duration: 0.3,
-        });
-      });
-
-      cardRef.current.addEventListener('mouseleave', () => {
-        gsap.to(contentRef.current, {
-          scale: 1,
-          duration: 0.3,
-          ease: 'power2.out',
-        });
-      });
-    }
-
-    return () => {
-      if (cardRef.current) {
-        gsap.killTweensOf(cardRef.current);
-      }
-    };
-  }, []);
-
   return (
     <div
       ref={cardRef}
       onClick={onClick}
-      className={`glass cursor-pointer group relative overflow-hidden border-2 transition-smooth ${bgGradients[name.toLowerCase()] || bgGradients.animals} h-full p-6 md:p-8`}
-      style={{
-        transformStyle: 'preserve-3d',
-        perspective: '1000px',
-      }}
+      className={`glass cursor-pointer group relative overflow-hidden border-2 ${bgGradients[name.toLowerCase()] || bgGradients.animals} h-full p-6 md:p-8`}
     >
-      {/* Animated gradient border effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+      {/* Gradient border effect */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 blur-xl"></div>
       </div>
 
       {/* Content */}
       <div ref={contentRef} className="relative z-10 flex flex-col h-full">
         {/* Category Icon */}
-        <div className="text-6xl md:text-7xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+        <div className="text-6xl md:text-7xl mb-4">
           {info.icon}
         </div>
 
         {/* Category Name */}
-        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 capitalize group-hover:gradient-text transition-all duration-300">
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 capitalize group-hover:gradient-text">
           {info.name}
         </h3>
 
@@ -121,10 +77,10 @@ export default function CategoryCard({
                 <span className="text-sm text-slate-400">Win Rate</span>
                 <div className="flex items-center gap-2">
                   <div className="w-24 h-2 bg-slate-700 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-green-500 to-emerald-500 transition-all duration-500"
-                      style={{ width: `${winRate}%` }}
-                    ></div>
+            <div
+                  className="h-full bg-gradient-to-r from-green-500 to-emerald-500"
+                  style={{ width: `${winRate}%` }}
+                ></div>
                   </div>
                   <span className="text-sm font-bold text-green-400">{winRate}%</span>
                 </div>
@@ -155,7 +111,7 @@ export default function CategoryCard({
               e.stopPropagation();
               onClick();
             }}
-            className="w-full py-2 px-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-lg opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-300"
+            className="w-full py-2 px-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-lg opacity-0 group-hover:opacity-100"
           >
             Play Now
           </button>

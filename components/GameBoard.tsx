@@ -6,7 +6,7 @@ import Keyboard from './Keyboard';
 import GameResultModal from './GameResultModal';
 import { WORDS_DATABASE, CATEGORY_INFO, CategoryKey } from '@/lib/wordData';
 import { updateStats, GameStats } from '@/lib/gameUtils';
-import { slideInFromTop, slideInFromBottom, flip } from '@/lib/animations';
+
 
 interface GameBoardProps {
   category: CategoryKey;
@@ -44,10 +44,6 @@ export default function GameBoard({
       const randomWord = words[Math.floor(Math.random() * words.length)];
       setCurrentWord(randomWord);
     }
-
-    // Animate on mount
-    slideInFromTop(headerRef.current, 0);
-    slideInFromBottom(gameInfoRef.current, 0.2);
   }, [category, words]);
 
   // Setup keyboard listener
@@ -109,9 +105,6 @@ export default function GameBoard({
       setWrongGuesses(0);
       setGameActive(true);
       setGameResult(null);
-
-      // Animate word display
-      flip(wordDisplayRef.current, 0);
     }
   };
 
@@ -140,11 +133,11 @@ export default function GameBoard({
 
   return (
     <div className="min-h-screen w-full px-4 py-8">
-      {/* Animated background */}
+      {/* Background blobs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-4000"></div>
+        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
+        <div className="absolute top-40 right-10 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
+        <div className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -155,7 +148,7 @@ export default function GameBoard({
         >
           <button
             onClick={onBack}
-            className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-bold py-2 px-6 rounded-lg transition-smooth-fast hover:scale-105 active:scale-95"
+            className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-bold py-2 px-6 rounded-lg"
           >
             ← Back
           </button>
@@ -187,7 +180,7 @@ export default function GameBoard({
               <div className="flex justify-center gap-1 flex-wrap">
                 {Array.from({ length: MAX_LIVES }, (_, i) =>
                   i < remainingLives ? (
-                    <span key={i} className="text-xl animate-pulse">❤️</span>
+                    <span key={i} className="text-xl">❤️</span>
                   ) : (
                     <span key={i} className="text-xl opacity-40">🖤</span>
                   )
@@ -239,13 +232,13 @@ export default function GameBoard({
               <button
                 onClick={handleGetHint}
                 disabled={!gameActive}
-                className="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-smooth-fast disabled:opacity-50 disabled:cursor-not-allowed hover:enabled:scale-105 active:scale-95"
+                className="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 💡 Get Hint
               </button>
               <button
                 onClick={handleNewWord}
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-bold py-3 px-6 rounded-lg transition-smooth-fast hover:scale-105 active:scale-95"
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-bold py-3 px-6 rounded-lg"
               >
                 🔄 New Word
               </button>
@@ -264,31 +257,7 @@ export default function GameBoard({
         />
       )}
 
-      <style>{`
-        @keyframes blob {
-          0%, 100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
 
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
     </div>
   );
 }

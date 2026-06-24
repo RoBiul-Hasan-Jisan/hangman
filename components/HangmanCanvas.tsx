@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
 import { drawHangman } from '@/lib/gameUtils';
 
 interface HangmanCanvasProps {
@@ -20,17 +19,6 @@ export default function HangmanCanvas({ wrongGuesses }: HangmanCanvasProps) {
 
     // Draw the hangman
     drawHangman(ctx, canvasRef.current, wrongGuesses);
-
-    // Shake animation when wrong guess is made
-    if (wrongGuesses > 0) {
-      gsap.to(containerRef.current, {
-        x: wrongGuesses > 10 ? -8 : -4,
-        duration: 0.1,
-        repeat: 5,
-        yoyo: true,
-        ease: 'power1.inOut',
-      });
-    }
   }, [wrongGuesses]);
 
   return (
@@ -57,7 +45,7 @@ export default function HangmanCanvas({ wrongGuesses }: HangmanCanvasProps) {
               {[...Array(15)].map((_, i) => (
                 <div
                   key={i}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  className={`w-2 h-2 rounded-full ${
                     i < wrongGuesses
                       ? 'bg-red-500 shadow-lg shadow-red-500/50'
                       : 'bg-slate-600'

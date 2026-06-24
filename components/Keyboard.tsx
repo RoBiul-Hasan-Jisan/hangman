@@ -22,7 +22,7 @@ export default function Keyboard({ guessedLetters, onGuess, disabled }: Keyboard
   };
 
   return (
-    <div ref={keyboardRef} className="w-full max-w-4xl mx-auto mt-8 space-y-2 px-4">
+    <div ref={keyboardRef} className="w-full space-y-2">
       {KEYBOARD_LAYOUT.map((row, rowIndex) => (
         <div
           key={rowIndex}
@@ -40,19 +40,15 @@ export default function Keyboard({ guessedLetters, onGuess, disabled }: Keyboard
                 onClick={() => handleLetterClick(letter)}
                 disabled={isDisabledButton}
                 className={`
-                  relative px-2.5 md:px-4 py-2.5 md:py-3 text-xs md:text-base font-bold rounded-lg
+                  px-2.5 md:px-3 py-2 md:py-2.5 text-xs md:text-sm font-semibold rounded-lg min-w-10
                   ${
                     isDisabledButton
-                      ? 'bg-slate-700/50 text-slate-500 cursor-not-allowed opacity-40 border border-slate-600/30'
-                      : 'glass text-white border border-slate-400/30 hover:border-blue-400/50 hover:bg-blue-500/10'
+                      ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                      : 'bg-accent text-white hover:bg-accent-dark'
                   }
                 `}
-                style={{
-                  minWidth: '32px',
-                  perspective: '1000px',
-                }}
               >
-                <span className="relative z-10">{letter}</span>
+                {letter}
               </button>
             );
           })}

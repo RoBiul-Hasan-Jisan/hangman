@@ -29,29 +29,19 @@ export default function GameResultModal({
   return (
     <div
       ref={backdropRef}
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4"
     >
       <div
         ref={modalRef}
-        className={`glass-strong border-2 rounded-2xl p-8 md:p-12 text-center max-w-md w-full ${
-          won
-            ? 'border-emerald-500/50 glow-blue'
-            : 'border-red-500/50 glow-pink'
+        className={`card-elevated p-8 md:p-12 text-center max-w-md w-full ${
+          won ? 'border-2 border-success/20' : 'border-2 border-error/20'
         }`}
-        style={{
-          transformStyle: 'preserve-3d',
-          perspective: '1000px',
-        }}
       >
-
-
         {/* Title */}
         <h2
           ref={titleRef}
           className={`text-4xl md:text-5xl font-black mb-6 ${
-            won
-              ? 'gradient-text'
-              : 'text-red-400'
+            won ? 'text-success' : 'text-error'
           }`}
         >
           {title}
@@ -60,22 +50,28 @@ export default function GameResultModal({
         {/* Message */}
         <p
           ref={messageRef}
-          className="text-slate-300 text-lg mb-8 whitespace-pre-line font-medium leading-relaxed"
+          className="text-gray-600 text-lg mb-8 whitespace-pre-line font-medium leading-relaxed"
         >
           {message}
         </p>
+
+        {/* Word Display */}
+        <div className="bg-foreground/5 rounded-lg p-4 mb-8">
+          <p className="text-sm text-gray-600 font-medium mb-2">The Word Was</p>
+          <p className="text-2xl font-bold text-accent font-mono">{word.toUpperCase()}</p>
+        </div>
 
         {/* Buttons */}
         <div ref={buttonsRef} className="flex flex-col gap-3">
           <button
             onClick={onPlayAgain}
-            className="w-full py-3 px-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-blue-500/50"
+            className="btn-primary"
           >
             🔄 Play Again
           </button>
           <button
             onClick={onBackToCategories}
-            className="w-full py-3 px-6 glass text-white font-bold rounded-lg border border-slate-400/30 hover:border-slate-300/50"
+            className="btn-secondary"
           >
             ← Back to Categories
           </button>

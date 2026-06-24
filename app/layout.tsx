@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Hangman Game",
@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700">
-      <body className={`${geistSans.className} min-h-screen overflow-x-hidden`}>
+    <html lang="en" className="bg-background">
+      <body className={`${outfit.className} min-h-screen overflow-x-hidden bg-background text-foreground`}>
         {children}
       </body>
     </html>

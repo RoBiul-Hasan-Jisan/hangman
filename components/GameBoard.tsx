@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import HangmanCanvas from './HangmanCanvas';
 import Keyboard from './Keyboard';
 import GameResultModal from './GameResultModal';
@@ -30,9 +30,7 @@ export default function GameBoard({
     word: string;
   } | null>(null);
 
-  const headerRef = useRef<HTMLDivElement>(null);
-  const gameInfoRef = useRef<HTMLDivElement>(null);
-  const wordDisplayRef = useRef<HTMLDivElement>(null);
+
 
   const MAX_LIVES = 15;
   const categoryInfo = CATEGORY_INFO[category];
@@ -132,90 +130,77 @@ export default function GameBoard({
   const remainingLives = MAX_LIVES - wrongGuesses;
 
   return (
-    <div className="min-h-screen w-full px-4 py-8">
-      {/* Background blobs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
-        <div className="absolute top-40 right-10 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
-        <div className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <div
-          ref={headerRef}
-          className="flex justify-between items-center mb-8 glass-strong border-2 border-slate-400/30 px-6 py-4 rounded-2xl"
-        >
-          <button
-            onClick={onBack}
-            className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-bold py-2 px-6 rounded-lg"
-          >
-            ← Back
-          </button>
-          <div
-            className="text-white font-bold py-2 px-6 rounded-full glass text-lg"
-            style={{
-              backgroundImage: `linear-gradient(135deg, ${categoryInfo.color}20, ${categoryInfo.color}40)`,
-              borderColor: `${categoryInfo.color}80`,
-              borderWidth: '2px',
-            }}
-          >
-            {categoryInfo.icon} {categoryInfo.name}
+    <div className="min-h-screen w-full bg-background">
+      {/* Header */}
+      <div className="border-b border-card-border bg-card-bg sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-between items-center">
+            <button
+              onClick={onBack}
+              className="text-foreground hover:text-accent font-semibold text-sm"
+            >
+              ← Back to Categories
+            </button>
+            <h1 className="text-2xl font-bold">
+              {categoryInfo.icon} {categoryInfo.name}
+            </h1>
+            <div className="text-right">
+              <p className="text-sm text-gray-600">Lives</p>
+              <p className="text-2xl font-bold text-error">{remainingLives}/{MAX_LIVES}</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Main Game Area */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {/* Canvas */}
-          <div className="flex justify-center items-start">
+      {/* Main Game Area */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Hangman Canvas */}
+          <div className="card-elevated p-6 flex justify-center items-center">
             <HangmanCanvas wrongGuesses={wrongGuesses} />
           </div>
 
-          {/* Game Info */}
-          <div ref={gameInfoRef} className="lg:col-span-2 flex flex-col gap-6">
+          {/* Game Content */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Word Display */}
+            <div className="card-elevated p-8 text-center">
+              <p className="text-sm text-gray-600 font-medium mb-4">Secret Word</p>
+              <p className="text-7xl md:text-8xl font-bold tracking-widest font-mono text-accent break-words">
+                {displayWord}
+              </p>
+            </div>
+
             {/* Lives Indicator */}
-            <div className="glass-strong border-2 border-red-500/30 p-6 rounded-2xl text-center">
-              <div className="text-sm text-slate-400 font-medium mb-3">Lives Remaining</div>
-              <div className="text-5xl font-black gradient-text mb-4">{remainingLives}</div>
-              <div className="flex justify-center gap-1 flex-wrap">
+            <div className="card-elevated p-6">
+              <p className="text-sm text-gray-600 font-medium mb-4">Lives Remaining</p>
+              <div className="flex justify-center gap-2 flex-wrap">
                 {Array.from({ length: MAX_LIVES }, (_, i) =>
                   i < remainingLives ? (
-                    <span key={i} className="text-xl">❤️</span>
+                    <span key={i} className="text-2xl">❤️</span>
                   ) : (
-                    <span key={i} className="text-xl opacity-40">🖤</span>
+                    <span key={i} className="text-2xl opacity-30">🖤</span>
                   )
                 )}
               </div>
             </div>
 
-            {/* Word Display */}
-            <div
-              ref={wordDisplayRef}
-              className="glass border-2 border-blue-500/30 p-8 rounded-2xl text-center"
-            >
-              <div className="text-sm text-slate-400 font-medium mb-4">Secret Word</div>
-              <div className="text-6xl md:text-7xl font-black text-white tracking-widest break-words font-mono">
-                {displayWord}
-              </div>
-            </div>
-
             {/* Used Letters */}
-            <div className="glass border-2 border-purple-500/30 p-6 rounded-2xl">
-              <div className="text-sm text-slate-400 font-medium mb-4">Used Letters</div>
-              <div className="flex flex-wrap gap-2 min-h-10">
+            <div className="card-elevated p-6">
+              <p className="text-sm text-gray-600 font-medium mb-4">Used Letters</p>
+              <div className="flex flex-wrap gap-2 min-h-12">
                 {Array.from(guessedLetters).length > 0 ? (
                   Array.from(guessedLetters)
                     .sort()
                     .map((letter) => (
                       <span
                         key={letter}
-                        className="glass text-white px-4 py-2 rounded-lg text-sm font-bold border border-slate-400/30 hover:border-purple-400/50 transition-all"
+                        className="px-3 py-1 bg-accent/10 text-accent text-sm font-semibold rounded-full"
                       >
                         {letter}
                       </span>
                     ))
                 ) : (
-                  <span className="text-slate-500 italic">No letters guessed yet</span>
+                  <span className="text-gray-500 italic text-sm">No letters guessed yet</span>
                 )}
               </div>
             </div>
@@ -227,18 +212,18 @@ export default function GameBoard({
               disabled={!gameActive}
             />
 
-            {/* Controls */}
-            <div className="flex gap-3 flex-col md:flex-row">
+            {/* Control Buttons */}
+            <div className="flex gap-4">
               <button
                 onClick={handleGetHint}
                 disabled={!gameActive}
-                className="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 💡 Get Hint
               </button>
               <button
                 onClick={handleNewWord}
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-bold py-3 px-6 rounded-lg"
+                className="btn-secondary flex-1"
               >
                 🔄 New Word
               </button>
@@ -256,8 +241,6 @@ export default function GameBoard({
           onBackToCategories={onBack}
         />
       )}
-
-
     </div>
   );
 }
